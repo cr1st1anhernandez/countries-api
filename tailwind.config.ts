@@ -15,6 +15,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      gridTemplateColumns: {
+        'auto-fill-20': 'repeat(auto-fill, minmax(20rem, 1fr))',
+      },
     },
   },
   darkMode: "class",
