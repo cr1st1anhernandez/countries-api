@@ -1,14 +1,27 @@
-"use client"
-import {Link, Image, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
-import { useState } from "react";
-import ThemeSwitcher from "./ThemeSwitcher";
+'use client'
+import {
+  Link,
+  Image,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from '@nextui-org/react'
+import { useState } from 'react'
+import ThemeSwitcher from './ThemeSwitcher'
 
-export default function Nav():JSX.Element {
-
+export default function Nav(): JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <Navbar className=" keppel-light bg-[#eef2ff] dark:bg-[#111113] dark:keppel-dark" maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      className=" keppel-light dark:keppel-dark"
+      maxWidth="full"
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarMenuToggle
         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         className="md:hidden"
@@ -21,7 +34,9 @@ export default function Nav():JSX.Element {
       </NavbarBrand>
       <NavbarContent className="gap-4" justify="center">
         <NavbarItem className="hidden md:flex">
-          Documentación
+          <Link color="primary" href="/docs/about/introduction/" className='font-bold'>
+            Documentación
+          </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end" className="hidden sm:flex">
