@@ -1,38 +1,42 @@
-"use client"
+'use client'
 import { Card, CardBody, Image } from '@nextui-org/react'
 import axios, { type AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import { type Country, type Curiosity } from '../types/interfaces'
+import { type Country, type Curiosity } from '../types/types'
 
 export default function Examples(): JSX.Element {
   const [curiosities, setCuriosities] = useState<Curiosity[]>([])
   const [countries, setCountries] = useState<Country[]>([])
 
-useEffect(() => {
-  const fetchCuriosities = async (): Promise<void> => {
-    try {
-      const curiositiesResponse: AxiosResponse = await axios.get('http://localhost:8080/country/mexico/curiosities/');
-      const curiositiesData: Curiosity[] = curiositiesResponse.data;
-      setCuriosities(curiositiesData);
+  useEffect(() => {
+    const fetchCuriosities = async (): Promise<void> => {
+      try {
+        const curiositiesResponse: AxiosResponse = await axios.get(
+          'http://localhost:8080/api/v1/country/mexico/curiosities/',
+        )
+        const curiositiesData: Curiosity[] = curiositiesResponse.data
+        setCuriosities(curiositiesData)
 
-      const countriesResponse: AxiosResponse = await axios.get('http://localhost:8080/all/countries/');
-      const countriesData: Country[] = countriesResponse.data;
-      setCountries(countriesData);
-    } catch (error) {
-      console.error('Error fetching countries:', error);
+        const countriesResponse: AxiosResponse = await axios.get(
+          'http://localhost:8080/api/v1/countries?page=0&size=3',
+        )
+        const countriesData: Country[] = countriesResponse.data
+        setCountries(countriesData)
+      } catch (error) {
+        console.error('Error fetching countries:', error)
+      }
     }
-  };
 
-  void fetchCuriosities();
-}, []);
+    void fetchCuriosities()
+  }, [])
 
   return (
-    <section className="flex flex-col px-6 gap-4 keppel-light dark:keppel-dark">
+    <section className="flex flex-col gap-4 px-6 keppel-light dark:keppel-dark">
       <h2>Examples</h2>
       <Card className="break-all p-2 font-bold">
-        <CardBody>[GET] https://api/country/mexico/curiosities/</CardBody>
+        <CardBody>[GET] http://localhost:8080/api/v1/country/mexico/curiosities/</CardBody>
       </Card>
-      <div className="md:grid-cols-auto-fill-20 grid gap-5">
+      <div className="grid gap-5 md:grid-cols-auto-fill-20">
         {curiosities.map((curiosity: Curiosity, index: number) => (
           <Card key={index} className="break-all p-2 font-bold">
             <CardBody className="flex flex-col gap-2">
@@ -42,15 +46,17 @@ useEffect(() => {
                 width={450}
                 height={200}
               />
-              <p className="font-bold">{curiosity.description}</p>
+              <p className="text-pretty font-bold">{curiosity.description}</p>
             </CardBody>
           </Card>
         ))}
       </div>
       <Card className="break-all p-2 font-bold">
-        <CardBody>[GET] https://api/all/countries/</CardBody>
+        <CardBody>
+          [GET] http://localhost:8080/api/v1/countries?page=0&size=3
+        </CardBody>
       </Card>
-      <div className="md:grid-cols-auto-fill-20 grid gap-5">
+      <div className="grid gap-5 md:grid-cols-auto-fill-20">
         {countries.map((country: Country, index: number) => (
           <Card key={index} className="break-all p-2 font-bold">
             <CardBody className="flex flex-col gap-2">
