@@ -21,7 +21,7 @@ html {
   }
   h2 {
     @apply text-2xl;
-    @apply lg:text-3xl;
+    @apply lg:text-5xl;
     @apply font-semibold;
   }
   h3 {
@@ -32,5 +32,9 @@ html {
   h4 {
     @apply text-lg;
     @apply font-semibold;
+  }
+  p {
+    @apply text-zinc-300;
+    @apply font-bold;
   }
 }
