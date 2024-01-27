@@ -7,6 +7,7 @@ import { type Country, type Curiosity } from '../types/types'
 export default function Examples(): JSX.Element {
   const [curiosities, setCuriosities] = useState<Curiosity[]>([])
   const [countries, setCountries] = useState<Country[]>([])
+  const [error, setError] = useState<string>('')
 
   useEffect(() => {
     const fetchCuriosities = async (): Promise<void> => {
@@ -23,7 +24,7 @@ export default function Examples(): JSX.Element {
         const countriesData: Country[] = countriesResponse.data
         setCountries(countriesData)
       } catch (error) {
-        console.error('Error fetching countries:', error)
+        setError('Error fetching data')
       }
     }
 
@@ -34,7 +35,9 @@ export default function Examples(): JSX.Element {
     <section className="flex flex-col gap-4 px-6 keppel-light dark:keppel-dark">
       <h2>Examples</h2>
       <Card className="break-all p-2 font-bold">
-        <CardBody>[GET] http://localhost:8080/api/v1/country/mexico/curiosities/</CardBody>
+        <CardBody>
+          [GET] http://localhost:8080/api/v1/country/mexico/curiosities/
+        </CardBody>
       </Card>
       <div className="grid gap-5 md:grid-cols-auto-fill-20">
         {curiosities.map((curiosity: Curiosity, index: number) => (
@@ -50,6 +53,9 @@ export default function Examples(): JSX.Element {
             </CardBody>
           </Card>
         ))}
+        {error && (
+          <p className="text-pretty font-bold text-rose-600">{error}</p>
+        )}
       </div>
       <Card className="break-all p-2 font-bold">
         <CardBody>
@@ -72,6 +78,9 @@ export default function Examples(): JSX.Element {
             </CardBody>
           </Card>
         ))}
+        {error && (
+          <p className="text-pretty font-bold text-rose-600">{error}</p>
+        )}
       </div>
     </section>
   )
