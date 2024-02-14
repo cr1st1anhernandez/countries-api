@@ -21,7 +21,7 @@ export default function Examples(): JSX.Element {
         const countriesResponse: AxiosResponse = await axios.get(
           'http://localhost:8080/api/v1/countries?page=0&size=3',
         )
-        const countriesData: Country[] = countriesResponse.data
+        const countriesData: Country[] = countriesResponse.data.content
         setCountries(countriesData)
       } catch (error) {
         setError('Error fetching data')
@@ -44,7 +44,7 @@ export default function Examples(): JSX.Element {
           <Card key={index} className="break-all p-2 font-bold">
             <CardBody className="flex flex-col gap-2">
               <Image
-                src={curiosity.url}
+                src={curiosity.imageUrl}
                 alt="curiosity"
                 width={450}
                 height={200}
@@ -53,7 +53,7 @@ export default function Examples(): JSX.Element {
             </CardBody>
           </Card>
         ))}
-        {error && (
+        {error !== null && (
           <p className="text-pretty font-bold text-rose-600">{error}</p>
         )}
       </div>
@@ -67,7 +67,7 @@ export default function Examples(): JSX.Element {
           <Card key={index} className="break-all p-2 font-bold">
             <CardBody className="flex flex-col gap-2">
               <Image
-                src={country.url}
+                src={country.imageUrl}
                 alt="curiosity"
                 width={450}
                 height={200}
@@ -78,7 +78,7 @@ export default function Examples(): JSX.Element {
             </CardBody>
           </Card>
         ))}
-        {error && (
+        {error !== null && (
           <p className="text-pretty font-bold text-rose-600">{error}</p>
         )}
       </div>
