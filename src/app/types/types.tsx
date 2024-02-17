@@ -1,14 +1,14 @@
 export interface Curiosity {
-  id: number;
-  countryId: number;
-  description: string;
-  url: string;
+  id: number
+  countryId: number
+  description: string
+  imageUrl: string
 }
 
 export interface Country {
-  id: number;
-  name: string;
-  capital: string;
-  population: number;
-  url: string;
+  id: number
+  name: string
+  capital: string
+  population: number
+  imageUrl: string
 }
