@@ -1,7 +1,13 @@
-"use client"
+'use client'
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import { FaMoon } from 'react-icons/fa'
-
 import { MdLightMode } from 'react-icons/md'
 
 export default function ThemeSwitcher(): JSX.Element {
@@ -22,16 +28,37 @@ export default function ThemeSwitcher(): JSX.Element {
   }, [darkMode])
 
   return (
-    <button
-      onClick={() => {
-        setDarkMode(!darkMode)
-      }}
-    >
-      {darkMode ? (
-        <FaMoon className="text-white" size={18} />
-      ) : (
-        <MdLightMode className="text-black" size={18} />
-      )}
-    </button>
+    <Dropdown>
+      <DropdownTrigger>
+        <Button variant="bordered">Theme</Button>
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownItem
+          onClick={() => {
+            setDarkMode(true)
+          }}
+          key="dark"
+          endContent={
+            <FaMoon className="text-zinc-900 dark:text-zinc-200" size={18} />
+          }
+        >
+          Dark
+        </DropdownItem>
+        <DropdownItem
+          key="light"
+          onClick={() => {
+            setDarkMode(false)
+          }}
+          endContent={
+            <MdLightMode
+              className="text-zinc-900 dark:text-zinc-200"
+              size={18}
+            />
+          }
+        >
+          Light
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   )
 }
