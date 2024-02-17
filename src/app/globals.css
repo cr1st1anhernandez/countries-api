@@ -34,7 +34,8 @@ html {
     @apply font-semibold;
   }
   p {
-    @apply text-zinc-300;
+    @apply dark:text-zinc-300;
+    @apply text-zinc-900;
     @apply font-bold;
   }
 }
